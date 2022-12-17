@@ -11,3 +11,5 @@
     - name: Create and start services
       community.docker.docker_compose:
         project_src: /tmp/docker-lamp
+        scale:
+          backend: "{{ scale_count }}"

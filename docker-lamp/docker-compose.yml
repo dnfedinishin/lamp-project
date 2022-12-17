@@ -8,10 +8,20 @@ services:
     - 80:80
     volumes:
       - ./app:/var/www/html
+    depends_on:
+      - backend
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: ./Dockerfile
+    command: php -f select.php
     links:
       - mariadb
     depends_on:
       - mariadb
+    volumes:
+      - ./app:/tmp
 
   mariadb:
     image: mariadb:10.4
