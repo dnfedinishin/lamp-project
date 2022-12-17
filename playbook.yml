@@ -1,0 +1,13 @@
+---
+- name: Deploy and run LAMP SQL Dump
+  hosts: all
+  tasks:
+    - name: Copy project in agent(s)
+      ansible.builtin.copy:
+       src: docker-lamp
+       dest: /tmp/
+       remote_src: false
+
+    - name: Create and start services
+      community.docker.docker_compose:
+        project_src: /tmp/docker-lamp
